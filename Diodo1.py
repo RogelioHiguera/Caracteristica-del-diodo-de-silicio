@@ -11,13 +11,16 @@ import matplotlib.pyplot as plt
 mA=1e3 #Constante para cambiar la escala en mA
 Is=1e-10 #Corriente de fuga
 T=27 #Temperatura en C
-Tk=273+T #Temperatura en K
-q=1.6e-19 #Carga
-k=1.38e-23 #Constante de Boltzmann
 n=2 #Coeficiente de idealidad
-VT=k*Tk/q #Voltaje termico
 Vd=np.linspace(-0.5,1,num=1000) #Barrido del voltaje del diodo
-Id=Is*np.exp(Vd/(n*VT)) #Corriente del diodo
+def Diodo1 (Is,n,T,Vd):
+    Tk=273+T #Temperatura en K
+    q=1.6e-19 #Carga
+    k=1.38e-23 #Constante de Boltzmann
+    VT=k*Tk/q #Voltaje termico
+    Id=Is*np.exp(Vd/(n*VT)) #Corriente del diodo
+    return Id
+Id=Diodo1(Is,n,T,Vd)
 fig,axes1=plt.subplots() #Crear una Figura para la grafica
 axes1.plot(Vd,mA*Id) #Grafica Id vs Vd
 axes1.set_title('Característica del diodo semiconductor de silicio') #Nombre de la grafica
